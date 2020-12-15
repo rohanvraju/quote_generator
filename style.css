@@ -90,6 +90,13 @@ button:active{
     font-size: 1.5rem;
 }
 
+.toggle-button{
+    position: fixed;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */

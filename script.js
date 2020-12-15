@@ -1,9 +1,11 @@
 let apiQuotes = [];
+let localSource = false;
 
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
+const toggleBtn = document.getElementById('toggle');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
@@ -23,8 +25,13 @@ function completeLoading(){
 
 function newQuote(){
     //radomly pick quote
-    const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-    
+    let quote = '';
+    if(!localSource){
+        quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+    } else {
+        quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
+    }
+
     loading();
 
     console.log(quote);
@@ -73,6 +80,7 @@ function tweetQuote(){
 //event listeners
 newQuoteBtn.addEventListener('click', newQuote);
 twitterBtn.addEventListener('click', tweetQuote);
+toggleBtn.addEventListener('click', toggleQuoteSource);
 
 //Get quote from API
 async function getQuote(){
@@ -87,6 +95,11 @@ async function getQuote(){
         //getQuote();
         console.log('No quote', error);
     }
+}
+
+//toggle source of quotes b/w local and API
+function toggleQuoteSource(){
+    localSource = !localSource;
 }
 
 //On load
