@@ -1,4 +1,4 @@
-//let apiQuotes = [];
+let apiQuotes = [];
 
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
@@ -23,7 +23,7 @@ function completeLoading(){
 
 function newQuote(){
     //radomly pick quote
-    const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
+    const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
     loading();
 
@@ -75,20 +75,20 @@ newQuoteBtn.addEventListener('click', newQuote);
 twitterBtn.addEventListener('click', tweetQuote);
 
 //Get quote from API
-// async function getQuote(){
-//     const apiUrl = 'https://type.fit/api/quotes';
+async function getQuote(){
+    const apiUrl = 'https://type.fit/api/quotes';
 
-//     try{
-//         const response = await fetch(apiUrl);
-//         apiQuotes = await response.json();
-//         newQuote();
+    try{
+        const response = await fetch(apiUrl);
+        apiQuotes = await response.json();
+        newQuote();
 
-//     } catch(error){
-//         //getQuote();
-//         console.log('No quote', error);
-//     }
-// }
+    } catch(error){
+        //getQuote();
+        console.log('No quote', error);
+    }
+}
 
 //On load
-//getQuote();
-newQuote();
+getQuote();
+//newQuote();
